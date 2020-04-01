@@ -38,3 +38,16 @@ jobs:
       - run:
           name: Deploy to Firebase
           command: ./node_modules/.bin/firebase deploy --token "$FIREBASE_TOKEN"
+
+      - run:
+          name: Create Config For CloudFlare config
+          commend: sed -e 's/account_id.*$/account_id="'$CF_ACCOUNTID'"/g' -e 's/zone_id.*$/zone_id="'$CF_ZONE_ID'"/g' wrangler.toml > t.toml
+
+
+      - run:
+          name: Overwrite 
+          command: mv t.toml >  wrangler.toml ; cat wrangler.toml
+
+      - run:
+          name: Deploy to Firebase CloudFlare
+          command: ./node_modules/.bin/wrangler publish 
