@@ -46,7 +46,7 @@ jobs:
 
       - run:
           name: Overwrite 
-          command: mv t.toml >  wrangler.toml ; cat wrangler.toml
+          command: mv t.toml wrangler.toml ; cat wrangler.toml
 
       - run:
           name: Deploy to Firebase CloudFlare
