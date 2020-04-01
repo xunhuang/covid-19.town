@@ -5,7 +5,8 @@ import { scaleQuantile } from "d3-scale";
 const geoUrl = "https://cdn.jsdelivr.net/npm/us-atlas@3/counties-10m.json";
 const unemployment = require("./unemployment-by-county-2017.json");
 
-const MapChart = () => {
+const MapChart = (props) => {
+    let setTooltipContent = props.setTooltipContent;
   let data = unemployment;
 
   const colorScale = scaleQuantile()
@@ -24,7 +25,6 @@ const MapChart = () => {
 
   return (
     <ComposableMap projection="geoAlbersUsa">
-      Hello Map!
       <Geographies geography={geoUrl}>
         {({ geographies }) =>
           geographies.map(geo => {
@@ -34,6 +34,15 @@ const MapChart = () => {
                 key={geo.rsmKey}
                 geography={geo}
                 fill={cur ? colorScale(cur.unemployment_rate) : "#EEE"}
+
+                onMouseEnter={() => {
+                    const name = geo.properties.name;
+                    // console.log(name);
+                    setTooltipContent(name);
+                  }}
+                  onMouseLeave={() => {
+                    setTooltipContent("");
+                  }}
               />
             );
           })
@@ -43,5 +52,5 @@ const MapChart = () => {
   );
 };
 
-export default MapChart;
+export default React.memo(MapChart);
 
