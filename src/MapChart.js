@@ -1,19 +1,12 @@
 import React, { useState, useEffect } from "react";
 import { ComposableMap, Geographies, Geography } from "react-simple-maps";
 import { scaleQuantile } from "d3-scale";
-import { csv } from "d3-fetch";
 
 const geoUrl = "https://cdn.jsdelivr.net/npm/us-atlas@3/counties-10m.json";
+const unemployment = require("./unemployment-by-county-2017.json");
 
 const MapChart = () => {
-  const [data, setData] = useState([]);
-
-  useEffect(() => {
-    // https://www.bls.gov/lau/
-    csv("./unemployment-by-county-2017.csv").then(counties => {
-      setData(counties);
-    });
-  }, []);
+  let data = unemployment;
 
   const colorScale = scaleQuantile()
     .domain(data.map(d => d.unemployment_rate))
