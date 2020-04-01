@@ -10,7 +10,7 @@ const MapChart = () => {
 
   useEffect(() => {
     // https://www.bls.gov/lau/
-    csv("/unemployment-by-county-2017.csv").then(counties => {
+    csv("./unemployment-by-county-2017.csv").then(counties => {
       setData(counties);
     });
   }, []);
