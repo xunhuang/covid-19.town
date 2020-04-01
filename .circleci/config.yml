@@ -41,7 +41,7 @@ jobs:
 
       - run:
           name: Create Config For CloudFlare config
-          commend: sed -e 's/account_id.*$/account_id="'$CF_ACCOUNTID'"/g' -e 's/zone_id.*$/zone_id="'$CF_ZONE_ID'"/g' wrangler.toml > t.toml
+          command: sed -e 's/account_id.*$/account_id="'$CF_ACCOUNTID'"/g' -e 's/zone_id.*$/zone_id="'$CF_ZONE_ID'"/g' wrangler.toml > t.toml
 
 
       - run:
