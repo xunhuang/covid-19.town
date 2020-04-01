@@ -24,7 +24,7 @@ const MapChart = (props) => {
     ]);
 
   return (
-    <ComposableMap projection="geoAlbersUsa">
+    <ComposableMap data-tip="" projection="geoAlbersUsa">
       <Geographies geography={geoUrl}>
         {({ geographies }) =>
           geographies.map(geo => {
